@@ -1,0 +1,6 @@
+name: NovaCoreGameEngineExt_1_16_5
+main: net.zeeraa.novacore.spigot.gameengine.ext_1_16_5.GameEngineExtension
+description: Adding some new awesome features to the game engine
+version: 1.0
+api-version: 1.16
+depend: [NovaCore, NovaCoreGameEngine]

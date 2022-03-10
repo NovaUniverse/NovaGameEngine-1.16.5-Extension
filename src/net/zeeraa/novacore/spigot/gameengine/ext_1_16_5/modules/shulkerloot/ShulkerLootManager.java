@@ -7,7 +7,6 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -68,57 +67,56 @@ public class ShulkerLootManager extends NovaModule implements Listener {
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			if (e.getClickedBlock().getType().name().contains("SHULKER_BOX")) {
-				Block block = e.getClickedBlock();
-				if (block.getState() instanceof Chest) {
-					if (lootTable != null) {
-						if (!shulkers.contains(block.getLocation())) {
-							Log.trace("Filling shulker at location " + block.getLocation().toString());
+			Log.trace(e.getAction() + " " + e.getClickedBlock().getType().name());
+			Block block = e.getClickedBlock();
+			if (block.getState() instanceof ShulkerBox) {
+				if (lootTable != null) {
+					if (!shulkers.contains(block.getLocation())) {
+						Log.trace("Filling shulker at location " + block.getLocation().toString());
 
-							LootTable lootTable = NovaCore.getInstance().getLootTableManager().getLootTable(this.lootTable);
+						LootTable lootTable = NovaCore.getInstance().getLootTableManager().getLootTable(this.lootTable);
 
-							if (lootTable == null) {
-								Log.warn("Missing loot table " + lootTable);
-								return;
-							}
+						if (lootTable == null) {
+							Log.warn("Missing loot table " + this.lootTable);
+							return;
+						}
 
-							shulkers.add(block.getLocation());
+						shulkers.add(block.getLocation());
 
-							ShulkerBox chest = (ShulkerBox) block.getState();
+						ShulkerBox chest = (ShulkerBox) block.getState();
 
-							Inventory inventory = chest.getInventory();
+						Inventory inventory = chest.getInventory();
 
-							ShulkerFillEvent event = new ShulkerFillEvent(block, lootTable);
+						ShulkerFillEvent event = new ShulkerFillEvent(block, lootTable);
 
-							Bukkit.getServer().getPluginManager().callEvent(event);
+						Bukkit.getServer().getPluginManager().callEvent(event);
 
-							if (event.isCancelled()) {
-								return;
-							}
+						if (event.isCancelled()) {
+							return;
+						}
 
-							if (event.hasLootTableChanged()) {
-								lootTable = event.getLootTable();
-							}
+						if (event.hasLootTableChanged()) {
+							lootTable = event.getLootTable();
+						}
 
-							inventory.clear();
+						inventory.clear();
 
-							List<ItemStack> loot = lootTable.generateLoot();
+						List<ItemStack> loot = lootTable.generateLoot();
 
-							inventory.clear();
+						inventory.clear();
 
-							while (loot.size() > inventory.getSize()) {
-								loot.remove(0);
-							}
+						while (loot.size() > inventory.getSize()) {
+							loot.remove(0);
+						}
 
-							while (loot.size() > 0) {
-								Random random = new Random();
+						while (loot.size() > 0) {
+							Random random = new Random();
 
-								int slot = random.nextInt(inventory.getSize());
+							int slot = random.nextInt(inventory.getSize());
 
-								if (inventory.getItem(slot) == null) {
-									ItemStack item = loot.remove(0);
-									inventory.setItem(slot, item);
-								}
+							if (inventory.getItem(slot) == null) {
+								ItemStack item = loot.remove(0);
+								inventory.setItem(slot, item);
 							}
 						}
 					}

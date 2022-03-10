@@ -63,6 +63,10 @@ public class ShulkerLoot extends MapModule {
 			}
 		});
 		trigger.addFlag(TriggerFlag.STOP_ON_GAME_END);
+		
+		if(lootTable == null) {
+			Log.warn("ShulkerLoot", "No loot table defined");
+		}
 	}
 
 	public String getLootTable() {
@@ -88,10 +92,11 @@ public class ShulkerLoot extends MapModule {
 	@Override
 	public void onMapLoad(GameMap map) {
 		if (ModuleManager.isDisabled(ShulkerLootManager.class)) {
-			Log.info("Loading ChestLootManager because the game map has a chest or ender chest loot table");
+			Log.info("Loading ShulkerLootManager because the game map has a chest or ender chest loot table");
 			ModuleManager.enable(ShulkerLootManager.class);
 		}
 
+		Log.debug("ShulkerLoot", "Setting loot table in ShulkerLootManager to " + this.getLootTable());
 		ShulkerLootManager.getInstance().setLootTable(this.getLootTable());
 	}
 

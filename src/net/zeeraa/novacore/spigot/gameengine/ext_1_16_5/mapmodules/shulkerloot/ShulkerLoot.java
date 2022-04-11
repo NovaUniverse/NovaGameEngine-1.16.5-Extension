@@ -5,14 +5,14 @@ import org.json.JSONObject;
 import net.zeeraa.novacore.commons.log.Log;
 import net.zeeraa.novacore.commons.utils.RandomGenerator;
 import net.zeeraa.novacore.spigot.gameengine.ext_1_16_5.modules.shulkerloot.ShulkerLootManager;
+import net.zeeraa.novacore.spigot.gameengine.module.modules.game.Game;
+import net.zeeraa.novacore.spigot.gameengine.module.modules.game.map.GameMap;
+import net.zeeraa.novacore.spigot.gameengine.module.modules.game.map.mapmodule.MapModule;
+import net.zeeraa.novacore.spigot.gameengine.module.modules.game.triggers.DelayedGameTrigger;
+import net.zeeraa.novacore.spigot.gameengine.module.modules.game.triggers.GameTrigger;
+import net.zeeraa.novacore.spigot.gameengine.module.modules.game.triggers.TriggerCallback;
+import net.zeeraa.novacore.spigot.gameengine.module.modules.game.triggers.TriggerFlag;
 import net.zeeraa.novacore.spigot.module.ModuleManager;
-import net.zeeraa.novacore.spigot.module.modules.game.Game;
-import net.zeeraa.novacore.spigot.module.modules.game.map.GameMap;
-import net.zeeraa.novacore.spigot.module.modules.game.map.mapmodule.MapModule;
-import net.zeeraa.novacore.spigot.module.modules.game.triggers.DelayedGameTrigger;
-import net.zeeraa.novacore.spigot.module.modules.game.triggers.GameTrigger;
-import net.zeeraa.novacore.spigot.module.modules.game.triggers.TriggerCallback;
-import net.zeeraa.novacore.spigot.module.modules.game.triggers.TriggerFlag;
 
 public class ShulkerLoot extends MapModule {
 	private String lootTable;

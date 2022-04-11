@@ -36,6 +36,8 @@ public class ShulkerLootManager extends NovaModule implements Listener {
 	}
 
 	public ShulkerLootManager() {
+		super("NovaGameEngineExt1_16_5.ShulkerLootManager");
+
 		ShulkerLootManager.instance = this;
 		this.shulkers = new ArrayList<Location>();
 		this.lootTable = null;
@@ -123,10 +125,5 @@ public class ShulkerLootManager extends NovaModule implements Listener {
 				}
 			}
 		}
-	}
-
-	@Override
-	public String getName() {
-		return "gamengine.ext1_16_5.ShulkerLootManager";
 	}
 }

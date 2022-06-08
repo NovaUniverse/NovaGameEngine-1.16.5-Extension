@@ -18,8 +18,8 @@ import org.bukkit.inventory.ItemStack;
 
 import net.zeeraa.novacore.commons.log.Log;
 import net.zeeraa.novacore.spigot.NovaCore;
-import net.zeeraa.novacore.spigot.abstraction.VersionIndependantUtils;
-import net.zeeraa.novacore.spigot.abstraction.enums.VersionIndependantSound;
+import net.zeeraa.novacore.spigot.abstraction.VersionIndependentUtils;
+import net.zeeraa.novacore.spigot.abstraction.enums.VersionIndependentSound;
 import net.zeeraa.novacore.spigot.language.LanguageManager;
 import net.zeeraa.novacore.spigot.loottable.LootTable;
 import net.zeeraa.novacore.spigot.module.NovaModule;
@@ -53,7 +53,7 @@ public class ShulkerLootManager extends NovaModule implements Listener {
 
 			Bukkit.getOnlinePlayers().forEach(player -> {
 				player.sendMessage(LanguageManager.getString(player, "novagameengine.shulker.refill"));
-				VersionIndependantUtils.get().playSound(player, player.getLocation(), VersionIndependantSound.NOTE_PLING, 1F, 1F);
+				VersionIndependentUtils.get().playSound(player, player.getLocation(), VersionIndependentSound.NOTE_PLING, 1F, 1F);
 			});
 		}
 	}
